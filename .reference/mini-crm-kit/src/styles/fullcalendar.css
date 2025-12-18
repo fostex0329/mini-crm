@@ -1,0 +1,269 @@
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1rem;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: rgb(226 232 240);
+  font-size: 0.95rem;
+}
+
+.fc .fc-scrollgrid {
+  border-radius: 1.5rem;
+  border-color: rgb(226 232 240);
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(15 23 42);
+}
+
+.fc .fc-button {
+  border-radius: 9999px;
+  border: none;
+  background-color: rgb(15 23 42);
+  color: white;
+  padding: 0.35rem 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.fc .fc-button.fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button.fc-button-primary:not(:disabled):active {
+  background-color: rgb(30 64 175);
+}
+
+.fc .fc-button:disabled {
+  opacity: 0.3;
+  background-color: rgb(148 163 184);
+}
+
+.fc .fc-button-group {
+  gap: 0.5rem;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-timegrid-slot-label-cushion,
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-datagrid-cell-cushion,
+.fc .fc-timeline-slot-cushion {
+  padding: 0.5rem 0.9rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.fc .fc-datagrid-cell-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fc .fc-resource-timeline-axis-cushion {
+  font-weight: 600;
+  color: rgb(15 23 42);
+}
+
+.fc .fc-timegrid-slots {
+  background-color: white;
+}
+
+.fc .fc-timegrid-slot-label {
+  width: 82px;
+  border: none;
+  border-top: none !important;
+  border-bottom: none !important;
+  background-color: transparent;
+  position: relative;
+  overflow: visible;
+}
+
+.fc .fc-timegrid-slot-label-frame,
+.fc .fc-timegrid-slot-label-cushion {
+  border: none;
+  background: transparent;
+}
+
+.fc .fc-timegrid-slot-label-frame {
+  border: none;
+  background: transparent;
+  min-height: 3rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.fc .fc-timegrid-body {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.fc .yohaku-slot-label {
+  display: inline-flex;
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgb(71 85 105);
+  text-align: right;
+  padding: 0.2rem 0.6rem 0 0.2rem;
+  position: relative;
+  top: -15.5px;
+  background-color: #fff;
+  z-index: 2;
+  justify-content: flex-end;
+}
+
+.fc .yohaku-slot-label::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  width: 8px;
+  height: 2px;
+  background-color: rgb(209 217 227);
+  top: 14.5px;
+  transform: none;
+  pointer-events: none;
+}
+
+.fc .fc-timegrid-slot-lane,
+.fc .fc-timeline-slots .fc-timeline-slot {
+  padding-left: 0.75rem;
+}
+
+.fc .fc-timegrid-event {
+  border-radius: 1rem;
+  border: none;
+  padding: 0 !important;
+  margin: 2px;
+  transform: translateY(32.5px);
+}
+
+/* reset default vertical borders so we can control them explicitly */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-left: none;
+  border-right: none;
+}
+
+.fc .fc-timegrid-slot-lane,
+.fc .fc-timeline-slots .fc-timeline-slot {
+  border-top-color: rgb(241 245 249);
+  min-height: 3rem;
+  height: 3rem;
+}
+
+.fc .fc-timegrid-slot[data-time$=":00:00"],
+.fc .fc-timegrid-slot-lane[data-time$=":00:00"] {
+  border-top: 2px solid rgb(203 213 225);
+}
+
+.fc .fc-timegrid-slot[data-time$=":30:00"] {
+  border-top-color: transparent;
+}
+
+.fc .fc-timegrid-divider {
+  display: none;
+}
+
+/* vertical grid lines */
+/* ----------------------------------------------------------------------- */
+
+.fc .fc-timegrid-axis {
+  border-right: none;
+}
+
+.fc .fc-timegrid-slot.fc-timegrid-slot-lane:has(+ .fc-timegrid-slot-lane) {
+  border-top-style: solid;
+}
+
+.fc .fc-timegrid-event .fc-event-main {
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  margin: 0.15rem;
+}
+
+.fc .fc-event-main-frame {
+  gap: 0.35rem;
+}
+
+.fc .fc-non-business {
+  background-color: rgb(248 250 252);
+}
+
+.fc .fc-timegrid .fc-day-today,
+.fc .fc-timegrid .fc-today,
+.fc .fc-daygrid .fc-day-today,
+.fc .fc-resource-timeline .fc-day-today {
+  background-color: rgb(255 255 255);
+}
+
+.fc .fc-timegrid-now-indicator-line {
+  border-color: rgb(220 38 38);
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+  border: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: rgb(220 38 38);
+  left: calc(100% - 6px);
+  top: 5px;
+  transform: translate(-50%, calc(-50% + 6px));
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.fc .fc-resource-timeline {
+  font-size: 0.95rem;
+}
+
+.fc .fc-timeline-event {
+  border-radius: 1rem;
+  border: none;
+}
+
+.fc .fc-timeline-event .fc-event-main {
+  padding: 0.45rem 0.75rem;
+  font-weight: 600;
+}
+.yohaku-vertical-line-host {
+  position: relative;
+}
+
+.fc .fc-col-header-cell,
+.fc .fc-timegrid-col,
+.fc .fc-timegrid-slot {
+  position: relative;
+}
+
+.yohaku-vertical-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgb(226 232 240);
+  left: 0;
+  pointer-events: none;
+}
+
+.yohaku-vertical-line--header {
+  top: 0.4rem;
+  bottom: 0.4rem;
+}
+
+.yohaku-vertical-line--allday {
+  top: 0.35rem;
+  bottom: 0.35rem;
+}
+
+.yohaku-vertical-line--slotcol {
+  top: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.yohaku-vertical-line--slotlane {
+  top: 0;
+  bottom: 0;
+}

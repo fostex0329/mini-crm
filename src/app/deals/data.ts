@@ -1,0 +1,162 @@
+export type DealRow = {
+  id: string;
+  dealName: string;
+  companyName: string;
+  amount: number;
+  status: "見込み" | "提案中" | "契約" | "請求準備" | "請求済み" | "入金済み";
+  owner: string;
+  alerts: { label: string; reason: string }[];
+  nextActionText: string;
+  nextActionOwner: string;
+  nextActionDue: string;
+  invoicePlannedMonth?: string;
+  invoiceStatus: "none" | "draft" | "issued" | "paid";
+  invoiceDueDate?: string;
+  amountInvoice?: number;
+  amountOutstanding?: number;
+  updatedAt: string;
+};
+
+export const deals: DealRow[] = [
+  {
+    id: "D1",
+    dealName: "LP制作",
+    companyName: "A社",
+    amount: 300000,
+    status: "請求済み",
+    owner: "佐藤 恵",
+    alerts: [{ label: "未入金（遅延）", reason: "実効期日を1日超過しています" }],
+    nextActionText: "入金確認（遅延対応）",
+    nextActionOwner: "佐藤 恵",
+    nextActionDue: "2025/12/16",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "issued",
+    invoiceDueDate: "2025/12/15",
+    amountInvoice: 300000,
+    amountOutstanding: 300000,
+    updatedAt: "2025-12-16",
+  },
+  {
+    id: "D2",
+    dealName: "動画編集",
+    companyName: "B社",
+    amount: 180000,
+    status: "請求済み",
+    owner: "田中 太郎",
+    alerts: [{ label: "入金期限まもなく", reason: "実効期日まであと3営業日です" }],
+    nextActionText: "入金予定の確認",
+    nextActionOwner: "田中 太郎",
+    nextActionDue: "2025/12/19",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "issued",
+    invoiceDueDate: "2025/12/22",
+    amountInvoice: 180000,
+    amountOutstanding: 180000,
+    updatedAt: "2025-12-18",
+  },
+  {
+    id: "D3",
+    dealName: "運用改善",
+    companyName: "C社",
+    amount: 250000,
+    status: "請求準備",
+    owner: "鈴木 一郎",
+    alerts: [{ label: "今月：未請求", reason: "請求予定月が当月で未請求" }],
+    nextActionText: "請求書の作成・発行",
+    nextActionOwner: "鈴木 一郎",
+    nextActionDue: "2025/12/16",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "draft",
+    amountInvoice: 250000,
+    amountOutstanding: 250000,
+    updatedAt: "2025-12-15",
+  },
+  {
+    id: "D4",
+    dealName: "バナー修正",
+    companyName: "D社",
+    amount: 120000,
+    status: "契約",
+    owner: "高橋 京子",
+    alerts: [{ label: "対応期限切れ", reason: "次アクション期限を2日超過しています" }],
+    nextActionText: "次の一手を更新",
+    nextActionOwner: "高橋 京子",
+    nextActionDue: "2025/12/14",
+    invoiceStatus: "none",
+    updatedAt: "2025-12-14",
+  },
+  {
+    id: "D5",
+    dealName: "サイト改修",
+    companyName: "E社",
+    amount: 450000,
+    status: "契約",
+    owner: "佐藤 恵",
+    alerts: [],
+    nextActionText: "要件確定ミーティング",
+    nextActionOwner: "佐藤 恵",
+    nextActionDue: "2025/12/23",
+    invoicePlannedMonth: "2026-01",
+    invoiceStatus: "none",
+    updatedAt: "2025-12-12",
+  },
+  {
+    id: "D6",
+    dealName: "記事制作",
+    companyName: "F社",
+    amount: 120000,
+    status: "入金済み",
+    owner: "伊藤 優",
+    alerts: [],
+    nextActionText: "完了の確認（必要なら）",
+    nextActionOwner: "伊藤 優",
+    nextActionDue: "2025/12/18",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "paid",
+    invoiceDueDate: "2025/12/10",
+    amountInvoice: 120000,
+    amountOutstanding: 0,
+    updatedAt: "2025-12-11",
+  },
+  {
+    id: "D7",
+    dealName: "EC運用",
+    companyName: "G社",
+    amount: 240000,
+    status: "請求済み",
+    owner: "田中 太郎",
+    alerts: [
+      { label: "入金期限まもなく", reason: "実効期日まであと2営業日です" },
+      { label: "対応期限切れ", reason: "次アクションを更新してください" },
+    ],
+    nextActionText: "次の一手を更新",
+    nextActionOwner: "田中 太郎",
+    nextActionDue: "2025/12/15",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "issued",
+    invoiceDueDate: "2025/12/21",
+    amountInvoice: 240000,
+    amountOutstanding: 240000,
+    updatedAt: "2025-12-15",
+  },
+  {
+    id: "D8",
+    dealName: "SNS運用",
+    companyName: "H社",
+    amount: 200000,
+    status: "請求準備",
+    owner: "鈴木 一郎",
+    alerts: [
+      { label: "今月：未請求", reason: "請求予定月が当月で未請求" },
+      { label: "対応期限切れ", reason: "次アクション期限を3日超過しています" },
+    ],
+    nextActionText: "請求書の作成・発行",
+    nextActionOwner: "鈴木 一郎",
+    nextActionDue: "2025/12/13",
+    invoicePlannedMonth: "2025-12",
+    invoiceStatus: "draft",
+    amountInvoice: 200000,
+    amountOutstanding: 200000,
+    updatedAt: "2025-12-13",
+  },
+];
