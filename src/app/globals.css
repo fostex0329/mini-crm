@@ -4,98 +4,61 @@
 
 @layer base {
   :root {
-    /* Yohaku Giken brand palette */
-    --color-primary: #4995b6;
-    --color-text: #1f2310;
-    --color-background: #eef4f6;
-    --color-border: #bdd2db;
-    --color-accent: #3a7fa0;
+    /* Base Colors (Neutral) */
+    --background: 210 20% 98%;    /* Very light gray-blue */
+    --foreground: 224 40% 10%;    /* Deep charcoal */
 
-    --background: 198 30% 95%;
-    --foreground: 76 39% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 76 39% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 76 39% 10%;
-    --primary: 200 44% 50%;
+    /* Primary (Brand) - A soft, premium blue */
+    --primary: 202 60% 45%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 198 23% 90%;
-    --secondary-foreground: 76 39% 10%;
-    --muted: 198 18% 88%;
-    --muted-foreground: 198 12% 40%;
-    --accent: 201 44% 45%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 200 27% 80%;
-    --input: 200 27% 80%;
-    --ring: 200 44% 50%;
-    --radius: 0.4rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* UI Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 224 40% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 40% 10%;
+
+    /* Action/State Colors */
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 224 40% 10%;
+    --muted: 210 20% 92%;
+    --muted-foreground: 215 15% 45%;
+    --accent: 202 60% 94%;
+    --accent-foreground: 202 65% 40%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and Dividers */
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 202 60% 45%;
+
+    /* Shapes */
+    --radius: 0.75rem; /* Softer corners for a modern feel */
   }
 
   .dark {
-    --background: 210 16% 12%;
-    --foreground: 0 0% 98%;
-    --card: 210 16% 12%;
-    --card-foreground: 0 0% 98%;
-    --popover: 210 16% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 200 44% 62%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 18% 20%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 18% 18%;
-    --muted-foreground: 200 10% 70%;
-    --accent: 201 44% 55%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 18% 26%;
-    --input: 210 18% 26%;
-    --ring: 200 44% 62%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    font-family: "Inter", "InterVariable", system-ui, -apple-system,
-      BlinkMacSystemFont, "Segoe UI", sans-serif;
-    letter-spacing: 0.01em;
-    line-height: 1.6;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    @apply text-foreground;
-  }
-
-  h1,
-  h2,
-  h3 {
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
   }
 }
-
-
 
 @layer base {
   * {
@@ -103,5 +66,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

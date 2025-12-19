@@ -10,9 +10,9 @@ import {
   SidebarTrigger,
 } from "@/components/shadcn/sidebar-07/sidebar";
 import { Button } from "@/components/ui/button";
-import { MonthPicker } from "@/components/yohaku/base/month-picker";
-import { DateTimePicker } from "@/components/yohaku/base/date-time-picker";
-import { AlertsTooltip, type AlertRecord } from "@/components/yohaku/base/alerts-tooltip";
+import { MonthPicker } from "@/components/_yohaku_old/base/month-picker";
+import { DateTimePicker } from "@/components/_yohaku_old/base/date-time-picker";
+import { AlertsTooltip, type AlertRecord } from "@/components/_yohaku_old/base/alerts-tooltip";
 
 const demoAlerts: AlertRecord[] = [
   {

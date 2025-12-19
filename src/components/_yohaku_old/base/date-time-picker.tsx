@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { format, parseISO, isValid } from "date-fns";
-import ja from "date-fns/locale/ja";
+import { ja } from "date-fns/locale";
 
-import { YohakuPopover, YohakuPopoverContent, YohakuPopoverTrigger } from "@/components/yohaku/base/popover";
-import { YohakuButton } from "@/components/yohaku/base/button";
-import { YohakuCalendar } from "@/components/yohaku/base/calendar";
+import { YohakuPopover, YohakuPopoverContent, YohakuPopoverTrigger } from "@/components/_yohaku_old/base/popover";
+import { YohakuButton } from "@/components/_yohaku_old/base/button";
+import { YohakuCalendar } from "@/components/_yohaku_old/base/calendar";
 import { cn } from "@/lib/utils";
 
 const DATE_FORMAT = "yyyy/MM/dd";

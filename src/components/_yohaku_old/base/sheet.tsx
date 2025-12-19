@@ -12,7 +12,7 @@ import {
   SheetTitle as ShadcnSheetTitle,
   SheetTrigger as ShadcnSheetTrigger,
 } from "@/components/ui/sheet";
-import { YohakuLabel } from "@/components/yohaku/base/label";
+import { YohakuLabel } from "@/components/_yohaku_old/base/label";
 import { cn } from "@/lib/utils";
 
 export const YohakuSheet = ShadcnSheet;

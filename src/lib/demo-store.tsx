@@ -1,14 +1,21 @@
 "use client";
 
 import * as React from "react";
-
-import { createInitialState, demoSeed } from "@/data/demo-seed";
+import { SEED_DEALS } from "@/lib/constants";
 import type {
   DealRecord,
   DemoState,
   QuickFilterKey,
 } from "@/types/crm";
-import { DEMO_STORAGE_KEY, DEMO_TODAY } from "@/lib/constants";
+
+const DEMO_STORAGE_KEY = "mini_crm_deals_v1";
+
+const createInitialState = (): DemoState => ({
+  deals: SEED_DEALS,
+  quickFilter: "none",
+  activeNav: "dashboard",
+  updatedAt: new Date().toISOString(),
+});
 
 const loadInitialState = (): DemoState => {
   if (typeof window === "undefined") {
@@ -17,10 +24,18 @@ const loadInitialState = (): DemoState => {
   try {
     const stored = window.sessionStorage.getItem(DEMO_STORAGE_KEY);
     if (stored) {
-      const parsed = JSON.parse(stored) as DemoState;
+      const parsed = JSON.parse(stored);
+      // If it is an array (Deal[]), use it deals
+      if (Array.isArray(parsed)) {
+          return {
+              ...createInitialState(),
+              deals: parsed as DealRecord[], // Cast to DealRecord[] (which is Deal[])
+          }
+      }
+      // If it is an object (DemoState)
       return {
-        ...demoSeed,
-        ...parsed,
+        ...createInitialState(),
+        ...(parsed as Partial<DemoState>),
       };
     }
   } catch (error) {
@@ -34,7 +49,6 @@ type DemoContextValue = {
   updateDeal: (dealId: string, updater: (deal: DealRecord) => DealRecord) => void;
   addDeal: (deal: DealRecord) => void;
   deleteDeal: (dealId: string) => void;
-  duplicateDeal: (dealId: string) => void;
   setQuickFilter: (filter: QuickFilterKey) => void;
   setActiveNav: (nav: DemoState["activeNav"]) => void;
   resetDemo: () => void;
@@ -47,7 +61,16 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    window.sessionStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(state));
+    // Sample code stores JUST the deals array in "mini_crm_deals_v1"
+    // "sessionStorage.setItem("mini_crm_deals_v1", JSON.stringify(SEED_DEALS));"
+    // So we should probably align with that if we want "reset demo" to work like sample code.
+    // But here we might want to store the whole state?
+    // Let's stick to storing just deals to be compatible with sample code logic if we copy paste sample code snippet later.
+    // BUT sample code snippet runs in page.tsx and manages state itself.
+    // Here we are centralizing.
+    
+    // Let's store the whole state for now, but handle the array case in loadInitialState (which I did).
+    window.sessionStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(state.deals)); 
   }, [state]);
 
   const updateDeal = React.useCallback(
@@ -56,13 +79,9 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
         ...previous,
         deals: previous.deals.map((deal) => {
           if (deal.id !== dealId) return deal;
-          const next = updater(deal);
-          return {
-            ...next,
-            updatedAt: DEMO_TODAY,
-          };
+          return updater(deal);
         }),
-        updatedAt: DEMO_TODAY,
+        updatedAt: new Date().toISOString(),
       }));
     },
     []
@@ -71,8 +90,8 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
   const addDeal = React.useCallback((deal: DealRecord) => {
     setState((previous) => ({
       ...previous,
-      deals: [...previous.deals, { ...deal, updatedAt: DEMO_TODAY }],
-      updatedAt: DEMO_TODAY,
+      deals: [...previous.deals, deal],
+      updatedAt: new Date().toISOString(),
     }));
   }, []);
 
@@ -80,41 +99,10 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
     setState((previous) => ({
       ...previous,
       deals: previous.deals.filter((deal) => deal.id !== dealId),
-      updatedAt: DEMO_TODAY,
+      updatedAt: new Date().toISOString(),
     }));
   }, []);
 
-  const duplicateDeal = React.useCallback(
-    (dealId: string) => {
-      setState((previous) => {
-        const target = previous.deals.find((deal) => deal.id === dealId);
-        if (!target) return previous;
-        const clone: DealRecord = {
-          ...JSON.parse(JSON.stringify(target)),
-          id: `${dealId}-COPY-${Date.now()}`,
-          title: `${target.title}（複製）`,
-          activities: [
-            ...target.activities,
-            {
-              id: `act_${dealId}_${Date.now()}`,
-              type: "note",
-              body: "案件を複製しました。",
-              createdAt: new Date().toISOString(),
-              createdBy: target.owner,
-            },
-          ],
-        };
-        clone.updatedAt = DEMO_TODAY;
-        const nextState = {
-          ...previous,
-          deals: [...previous.deals, clone],
-          updatedAt: DEMO_TODAY,
-        };
-        return nextState;
-      });
-    },
-    []
-  );
 
   const setQuickFilter = React.useCallback((filter: QuickFilterKey) => {
     setState((previous) => ({
@@ -144,7 +132,6 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
       updateDeal,
       addDeal,
       deleteDeal,
-      duplicateDeal,
       setQuickFilter,
       setActiveNav,
       resetDemo,
@@ -154,7 +141,6 @@ export function DemoDataProvider({ children }: { children: React.ReactNode }) {
       updateDeal,
       addDeal,
       deleteDeal,
-      duplicateDeal,
       setQuickFilter,
       setActiveNav,
       resetDemo,

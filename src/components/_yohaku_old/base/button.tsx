@@ -24,3 +24,4 @@ export const YohakuButton = React.forwardRef<HTMLButtonElement, YohakuButtonProp
 );
 
 YohakuButton.displayName = "YohakuButton";
+export const yohakuButtonBaseClasses = "rounded-xl font-semibold tracking-wide";

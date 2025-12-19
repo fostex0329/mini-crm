@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { YohakuInput, type YohakuInputProps } from "@/components/yohaku/base/input";
+import { YohakuInput, type YohakuInputProps } from "@/components/_yohaku_old/base/input";
 
 export type YohakuInputGroupProps = React.HTMLAttributes<HTMLDivElement>;
 

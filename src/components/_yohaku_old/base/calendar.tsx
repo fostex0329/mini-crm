@@ -1,16 +1,15 @@
 import * as React from "react";
 
-import { Calendar, type CalendarProps } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 
-export type YohakuCalendarProps = CalendarProps & {
+export type YohakuCalendarProps = React.ComponentProps<typeof Calendar> & {
   timeZone?: string;
 };
 
 export const YohakuCalendar = React.forwardRef<HTMLDivElement, YohakuCalendarProps>(
   ({ className, timeZone, ...props }, ref) => (
     <Calendar
-      ref={ref}
       {...props}
       timeZone={timeZone}
       className={cn(
