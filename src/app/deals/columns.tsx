@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { AlertsTooltip } from "@/components/yohaku/base/alerts-tooltip";
+import { AlertsTooltip } from "@/components/_yohaku_old/base/alerts-tooltip";
 
 import type { DealRow } from "./data";
 

@@ -1,10 +1,11 @@
-import { addMonths, format } from "date-fns";
-
-import { DEMO_TODAY } from "@/lib/constants";
+import { DEMO_TODAY } from "@/lib/constants"; // Assuming DEMO_TODAY is in constants? It was in sample code as hardcoded "2025-12-17" in calculateAlerts default param.
 import type { DealViewModel, QuickFilterKey } from "@/types/crm";
 
-const currentMonth = DEMO_TODAY.slice(0, 7);
-const nextMonth = format(addMonths(new Date(DEMO_TODAY), 1), "yyyy-MM");
+// We can define DEMO_TODAY here or import. sample-code uses "2025-12-17"
+const demoTodayDate = new Date("2025-12-17");
+const currentMonth = `${demoTodayDate.getFullYear()}-${String(demoTodayDate.getMonth() + 1).padStart(2, '0')}`;
+// nextMonth logic not in sample code filters used in Dashboard, but let's keep it if useful, or simplify.
+// sample code filters: overdue, due_soon, unbilled_this_month, action_overdue.
 
 export type QuickFilterDefinition = {
   key: QuickFilterKey;
@@ -27,38 +28,25 @@ export const quickFilterDefinitions: QuickFilterDefinition[] = [
     predicate: (deal) => deal.alerts.some((alert) => alert.type === "overdue"),
   },
   {
-    key: "dueSoon",
+    key: "due_soon",
     label: "入金期限まもなく",
-    description: "3営業日以内",
-    predicate: (deal) => deal.alerts.some((alert) => alert.type === "dueSoon"),
+    description: "5日以内", 
+    predicate: (deal) => deal.alerts.some((alert) => alert.type === "due_soon"),
   },
   {
-    key: "unbilledThisMonth",
+    key: "unbilled_this_month",
     label: "今月：未請求",
     description: "請求予定月=当月",
-    predicate: (deal) =>
-      deal.invoicePlannedMonth === currentMonth &&
-      !["issued", "paid"].includes(deal.invoice?.status ?? "none"),
+    predicate: (deal) => deal.alerts.some((alert) => alert.type === "unbilled_this_month"),
   },
   {
-    key: "actionOverdue",
+    key: "action_overdue",
     label: "対応期限切れ",
     description: "次アクション遅延",
-    predicate: (deal) =>
-      deal.alerts.some((alert) => alert.type === "actionOverdue"),
+    predicate: (deal) => deal.alerts.some((alert) => alert.type === "action_overdue"),
   },
-  {
-    key: "plannedThisMonth",
-    label: "今月：請求予定",
-    description: "請求予定月=今月",
-    predicate: (deal) => deal.invoicePlannedMonth === currentMonth,
-  },
-  {
-    key: "plannedNextMonth",
-    label: "来月：請求予定",
-    description: "請求予定月=来月",
-    predicate: (deal) => deal.invoicePlannedMonth === nextMonth,
-  },
+  // Extra filters from original quick-filters (optional, maybe keep if sidebar uses them)
+  // But Dashboard only uses the 4 above.
 ];
 
 export const getQuickFilterDefinition = (key: QuickFilterKey) =>

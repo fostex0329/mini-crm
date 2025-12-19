@@ -3,15 +3,8 @@
 import * as React from "react";
 
 import { useDemoData } from "@/lib/demo-store";
-import { toDealViewModel } from "@/lib/view-models";
-import {
-  YohakuTable,
-  YohakuTableBody,
-  YohakuTableCell,
-  YohakuTableHead,
-  YohakuTableHeader,
-  YohakuTableRow,
-} from "@/components/yohaku/base/table";
+import { DataTable } from "@/components/yohaku/ui/data-table";
+import { columns } from "./components/columns";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
@@ -22,22 +15,33 @@ const invoiceStatusOptions = [
 ];
 
 export default function InvoicesPage() {
-  const { state } = useDemoData();
-  const deals = React.useMemo(() => state.deals.map((deal) => toDealViewModel(deal)), [state.deals]);
+  const { state, updateDeal } = useDemoData();
+  const deals = state.deals;
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [ownerFilter, setOwnerFilter] = React.useState("all");
   const [searchTerm, setSearchTerm] = React.useState("");
 
-  const invoices = deals.filter((deal) => deal.invoice && deal.invoice.status !== "none");
+  const invoices = deals.filter((deal) => deal.invoice_summary && deal.invoice_summary.status !== "none");
+
+  // Derive owners from deals
+  const owners = React.useMemo(() => {
+    const uniqueOwners = new Map();
+    deals.forEach(deal => {
+      if (!uniqueOwners.has(deal.owner_id)) {
+        uniqueOwners.set(deal.owner_id, deal.owner_name);
+      }
+    });
+    return Array.from(uniqueOwners.entries()).map(([id, name]) => ({ id, name }));
+  }, [deals]);
 
   const filtered = invoices.filter((deal) => {
-    if (statusFilter !== "all" && deal.invoice?.status !== statusFilter) return false;
-    if (ownerFilter !== "all" && deal.owner.id !== ownerFilter) return false;
+    if (statusFilter !== "all" && deal.invoice_summary.status !== statusFilter) return false;
+    if (ownerFilter !== "all" && deal.owner_id !== ownerFilter) return false;
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       if (
         !deal.title.toLowerCase().includes(term) &&
-        !deal.company.name.toLowerCase().includes(term)
+        !deal.company_name.toLowerCase().includes(term)
       ) {
         return false;
       }
@@ -46,7 +50,7 @@ export default function InvoicesPage() {
   });
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-4 py-10">
+    <div className="flex flex-1 flex-col gap-6">
       <header className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow">
         <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -78,9 +82,9 @@ export default function InvoicesPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">すべて</SelectItem>
-                {state.users.map((user) => (
+                {owners.map((user) => (
                   <SelectItem key={user.id} value={user.id}>
-                    {user.displayName}
+                    {user.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -93,42 +97,7 @@ export default function InvoicesPage() {
         <p className="text-sm text-muted-foreground">
           {filtered.length} 件 / 全 {invoices.length} 件
         </p>
-        <YohakuTable>
-          <YohakuTableHeader>
-            <YohakuTableRow>
-              <YohakuTableHead>案件名</YohakuTableHead>
-              <YohakuTableHead>取引先</YohakuTableHead>
-              <YohakuTableHead>担当</YohakuTableHead>
-              <YohakuTableHead>請求日</YohakuTableHead>
-              <YohakuTableHead>入金期日</YohakuTableHead>
-              <YohakuTableHead>請求金額</YohakuTableHead>
-              <YohakuTableHead>未回収額</YohakuTableHead>
-              <YohakuTableHead>ステータス</YohakuTableHead>
-            </YohakuTableRow>
-          </YohakuTableHeader>
-          <YohakuTableBody>
-            {filtered.map((deal) => (
-              <YohakuTableRow key={deal.id}>
-                <YohakuTableCell>{deal.title}</YohakuTableCell>
-                <YohakuTableCell>{deal.company.name}</YohakuTableCell>
-                <YohakuTableCell>{deal.owner.displayName}</YohakuTableCell>
-                <YohakuTableCell>{deal.invoice?.invoiceDate ?? "—"}</YohakuTableCell>
-                <YohakuTableCell>{deal.invoice?.invoiceDueDate ?? "—"}</YohakuTableCell>
-                <YohakuTableCell>
-                  {deal.invoice?.amountInvoice
-                    ? `¥${deal.invoice.amountInvoice.toLocaleString()}`
-                    : "—"}
-                </YohakuTableCell>
-                <YohakuTableCell>
-                  {deal.invoiceSummary.amountOutstanding != null
-                    ? `¥${deal.invoiceSummary.amountOutstanding.toLocaleString()}`
-                    : "—"}
-                </YohakuTableCell>
-                <YohakuTableCell>{deal.invoice?.status ?? "none"}</YohakuTableCell>
-              </YohakuTableRow>
-            ))}
-          </YohakuTableBody>
-        </YohakuTable>
+        <DataTable columns={columns} data={filtered} containerClassName="max-h-[calc(100vh-250px)]" meta={{ onDealUpdate: updateDeal }} />
       </section>
     </div>
   );

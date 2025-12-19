@@ -4,17 +4,18 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  type PopoverProps,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+
+export type YohakuPopoverProps = React.ComponentProps<typeof Popover>;
 
 const baseContentClass =
   "rounded-2xl border border-[var(--color-border)] bg-white/95 p-3 shadow-xl shadow-slate-200/80 backdrop-blur";
 
 export const YohakuPopover = React.forwardRef<
   React.ElementRef<typeof Popover>,
-  PopoverProps
->((props, ref) => <Popover ref={ref} {...props} />);
+  YohakuPopoverProps
+>((props, ref) => <Popover {...props} />);
 YohakuPopover.displayName = "YohakuPopover";
 
 export const YohakuPopoverTrigger = React.forwardRef<

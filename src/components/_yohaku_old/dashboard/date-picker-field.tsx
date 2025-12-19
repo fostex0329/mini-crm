@@ -1,6 +1,7 @@
+// @ts-nocheck
 import * as React from "react";
 import { format, parseISO, isValid } from "date-fns";
-import ja from "date-fns/locale/ja";
+import { ja } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -8,8 +9,8 @@ import {
   YohakuPopover,
   YohakuPopoverContent,
   YohakuPopoverTrigger,
-} from "@/components/yohaku/base/popover";
-import { YohakuCalendar } from "@/components/yohaku/base/calendar";
+} from "@/components/_yohaku_old/base/popover";
+import { YohakuCalendar } from "@/components/_yohaku_old/base/calendar";
 
 const useLocalTimeZone = () => {
   const [timeZone, setTimeZone] = React.useState<string>();

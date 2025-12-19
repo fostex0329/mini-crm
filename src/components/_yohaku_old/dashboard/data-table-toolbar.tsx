@@ -4,7 +4,7 @@ import * as React from "react";
 import type { Table } from "@tanstack/react-table";
 import { X, SearchIcon, Settings2, FilePlus2 } from "lucide-react";
 
-import { YohakuButton } from "@/components/yohaku/base/button";
+import { YohakuButton } from "@/components/_yohaku_old/base/button";
 import {
   YohakuDropdownMenu,
   YohakuDropdownMenuCheckboxItem,
@@ -12,12 +12,12 @@ import {
   YohakuDropdownMenuLabel,
   YohakuDropdownMenuSeparator,
   YohakuDropdownMenuTrigger,
-} from "@/components/yohaku/base/dropdown-menu";
+} from "@/components/_yohaku_old/base/dropdown-menu";
 import {
   YohakuInputGroup,
   YohakuInputGroupAddon,
   YohakuInputGroupInput,
-} from "@/components/yohaku/base/input-group";
+} from "@/components/_yohaku_old/base/input-group";
 import type { FacetedFilterOption } from "./data/task-filters";
 import {
   dashboardPriorities,

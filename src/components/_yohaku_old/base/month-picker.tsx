@@ -4,14 +4,14 @@ import * as React from "react";
 import { addMonths, format } from "date-fns";
 import { ChevronDownIcon } from "lucide-react";
 
-import { YohakuButton } from "@/components/yohaku/base/button";
+import { YohakuButton } from "@/components/_yohaku_old/base/button";
 import {
   YohakuSelect,
   YohakuSelectContent,
   YohakuSelectItem,
   YohakuSelectTrigger,
   YohakuSelectValue,
-} from "@/components/yohaku/base/select";
+} from "@/components/_yohaku_old/base/select";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_MONTHS = 24;

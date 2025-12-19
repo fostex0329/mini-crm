@@ -4,8 +4,8 @@ import * as React from "react";
 import type { Column } from "@tanstack/react-table";
 import { PlusIcon, XIcon } from "lucide-react";
 
-import { YohakuBadge } from "@/components/yohaku/base/badge";
-import { YohakuButton } from "@/components/yohaku/base/button";
+import { YohakuBadge } from "@/components/_yohaku_old/base/badge";
+import { YohakuButton } from "@/components/_yohaku_old/base/button";
 import {
   YohakuDropdownMenu,
   YohakuDropdownMenuCheckboxItem,
@@ -13,7 +13,7 @@ import {
   YohakuDropdownMenuItem,
   YohakuDropdownMenuSeparator,
   YohakuDropdownMenuTrigger,
-} from "@/components/yohaku/base/dropdown-menu";
+} from "@/components/_yohaku_old/base/dropdown-menu";
 import type { FacetedFilterOption } from "./data/task-filters";
 
 interface DataTableFacetedFilterProps<TData, TValue> {
