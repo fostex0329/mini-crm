@@ -104,12 +104,11 @@ export const columns: ColumnDef<Deal>[] = [
     enableSorting: true,
   },
   {
-    accessorFn: (row) => row.company.name,
-    id: "company",
+    accessorKey: "company_name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="取引先" />
     ),
-    cell: ({ row }) => <div className="truncate text-slate-600 min-w-[140px] max-w-[240px]">{row.original.company?.name || "—"}</div>,
+    cell: ({ row }) => <div className="truncate text-slate-600 min-w-[140px] max-w-[240px]">{row.original.company_name || "—"}</div>,
     enableSorting: true,
   },
   {
@@ -179,12 +178,11 @@ export const columns: ColumnDef<Deal>[] = [
     enableSorting: true,
   },
   {
-    accessorFn: (row) => row.owner.display_name,
-    id: "owner",
+    accessorKey: "owner_name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="担当" />
     ),
-    cell: ({ row }) => <div className="text-slate-600">{row.original.owner?.display_name || "—"}</div>,
+    cell: ({ row }) => <div className="text-slate-600">{row.original.owner_name || "—"}</div>,
     enableSorting: true,
   },
   {

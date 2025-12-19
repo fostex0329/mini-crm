@@ -113,12 +113,11 @@ export const columns: ColumnDef<Deal>[] = [
     enableSorting: true,
   },
   {
-    accessorFn: (row) => row.company.name,
-    id: "company",
+    accessorKey: "company_name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="取引先" />
     ),
-    cell: ({ row }) => <div className="truncate text-slate-600 min-w-[140px] max-w-[200px]">{row.original.company?.name || "—"}</div>,
+    cell: ({ row }) => <div className="truncate text-slate-600 min-w-[140px] max-w-[200px]">{row.original.company_name || "—"}</div>,
     enableSorting: true,
   },
   {
@@ -177,12 +176,11 @@ export const columns: ColumnDef<Deal>[] = [
     enableSorting: true,
   },
   {
-    accessorFn: (row) => row.owner.display_name,
-    id: "owner",
+    accessorKey: "owner_name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="担当" />
     ),
-    cell: ({ row }) => <div className="text-slate-600">{row.original.owner?.display_name || "—"}</div>,
+    cell: ({ row }) => <div className="text-slate-600">{row.original.owner_name || "—"}</div>,
     enableSorting: true,
   },
   {
@@ -190,7 +188,7 @@ export const columns: ColumnDef<Deal>[] = [
     header: "最終更新内容",
     cell: ({ row }) => {
         const deal = row.original
-        return <div className="text-slate-600 truncate max-w-[200px]">{deal.logs && deal.logs.length > 0 ? deal.logs[0].content : "案件作成"}</div>
+        return <div className="text-slate-600 truncate max-w-[200px]">{deal.last_activity_summary || "案件作成"}</div>
     },
     enableSorting: false,
     minSize: 200,

@@ -240,7 +240,6 @@ export const columns: ColumnDef<Deal>[] = [
                     "bg-slate-50 text-slate-400 border-dashed border-slate-300": !status || status === "none" || status === "draft",
                     "bg-orange-50 text-orange-700": status === "issued",
                     "bg-purple-50 text-purple-700": status === "paid",
-                    "bg-red-50 text-red-700": status === "overdue",
                   }
                 )}
               >
@@ -251,7 +250,6 @@ export const columns: ColumnDef<Deal>[] = [
                        "draft": "下書き",
                        "issued": "請求済み",
                        "paid": "入金済み",
-                       "overdue": "期限切れ",
                        "none": "未設定"
                      }
                      return statusMap[s] || "未設定"
